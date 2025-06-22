@@ -341,9 +341,9 @@ namespace MonsterDatEditor
                     {
                         ID = Convert.ToInt32(row.Cells["ID"].Value),
                         Name = Convert.ToString(row.Cells["Name"].Value),
-                        Size = Convert.ToInt32(row.Cells["Size"].Value),
+                        Size = Convert.ToInt32(row.Cells["Size"].Value),  // Size dikumpul
                         Icon1 = Convert.ToInt32(row.Cells["Icon1"].Value),
-                        Type = Convert.ToInt32(row.Cells["Type"].Value),
+                        Type = Convert.ToInt32(row.Cells["Type"].Value),  // Type dikumpul
                         HP = Convert.ToInt32(row.Cells["HP"].Value),
                         Level = Convert.ToInt32(row.Cells["Level"].Value),
                         Aura1 = Convert.ToString(row.Cells["Aura1"].Value),
@@ -375,10 +375,10 @@ namespace MonsterDatEditor
                     Array.Copy(nameBytes, 0, b, 4, Math.Min(nameBytes.Length, 16)); // 4-19
 
                     BitConverter.GetBytes(m.Icon1).CopyTo(b, 20);  // 20-23
-                    BitConverter.GetBytes(m.Type).CopyTo(b, 24);   // 24-27
+                    BitConverter.GetBytes(m.Type).CopyTo(b, 48);   // Tukar, Type ditulis ke indeks 48
                     BitConverter.GetBytes(m.HP).CopyTo(b, 28);     // 28-31
                     BitConverter.GetBytes(m.Level).CopyTo(b, 32);  // 32-35
-                    BitConverter.GetBytes(m.Size).CopyTo(b, 48);   // 48-51
+                    BitConverter.GetBytes(m.Size).CopyTo(b, 24);   // Tukar, Size ditulis ke indeks 24
 
                     var aura1Bytes = Encoding.GetEncoding("GB18030").GetBytes(m.Aura1 ?? "");
                     Array.Copy(aura1Bytes, 0, b, 56, Math.Min(aura1Bytes.Length, 128)); // 56-183
@@ -392,6 +392,7 @@ namespace MonsterDatEditor
 
             MessageBox.Show($"Saved {count} monster(s) to file.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
 
 
