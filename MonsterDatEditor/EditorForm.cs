@@ -100,14 +100,15 @@ namespace MonsterDatEditor
         {
             public int ID { get; set; }
             public string Name { get; set; }
-            public int Size { get; set; }
             public int Icon1 { get; set; }
-            public int Type { get; set; }
+            public int Type { get; set; }  // Tukar ke sini, supaya Type di sini
             public int HP { get; set; }
             public int Level { get; set; }
+            public int Size { get; set; }  // Tukar ke bawah, supaya Size di sini
             public string Aura1 { get; set; }
             public string Aura2 { get; set; }
         }
+
 
 
 
@@ -147,10 +148,10 @@ namespace MonsterDatEditor
                     int id = BitConverter.ToInt32(b, 0);
                     string name = Encoding.GetEncoding("GB18030").GetString(b, 4, 16).TrimEnd('\0');
                     int icon1 = BitConverter.ToInt32(b, 20);
-                    int type = BitConverter.ToInt32(b, 24);
+                    int type = BitConverter.ToInt32(b, 48);  // Type dibaca selepas
                     int hp = BitConverter.ToInt32(b, 28);
                     int level = BitConverter.ToInt32(b, 32);
-                    int size = BitConverter.ToInt32(b, 48);
+                    int size = BitConverter.ToInt32(b, 24);  // Size dibaca sebelum
                     string aura1 = Encoding.GetEncoding("GB18030").GetString(b, 56, 128).TrimEnd('\0');
                     string aura2 = Encoding.GetEncoding("GB18030").GetString(b, 184, 128).TrimEnd('\0');
 
